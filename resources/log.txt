@@ -1,0 +1,107 @@
+mysql> source C:/Users/Gabe/eclipse-workspace/POO-University-Library-Project/resources/uniLib.sql
+ERROR: 
+Failed to open file 'C:\Users\Gabe\eclipse-workspace\POO-University-Library-Project\resources\uniLib.sql', error: 2
+mysql> source C:/Users/Gabe/eclipse-workspace/POO-University-Library-Project/resources/uniLib.sql;
+ERROR: 
+Failed to open file 'C:\Users\Gabe\eclipse-workspace\POO-University-Library-Project\resources\uniLib.sql', error: 2
+mysql> source C:/Users/Gabe/eclipse-workspace/POO-University-Library-Project/resources/uniLib.sql
+ERROR: 
+Failed to open file 'C:\Users\Gabe\eclipse-workspace\POO-University-Library-Project\resources\uniLib.sql', error: 2
+mysql> source C:/Users/Gabe/eclipse-workspace/POO-University-Library-Project/resources/uniLib
+ERROR: 
+Failed to open file 'C:\Users\Gabe\eclipse-workspace\POO-University-Library-Project\resources\uniLib', error: 2
+mysql> source C:/Users/Gabe/eclipse-workspace/POO-University-Library-Project/resources/uniLib.sql
+ERROR: 
+Failed to open file 'C:\Users\Gabe\eclipse-workspace\POO-University-Library-Project\resources\uniLib.sql', error: 2
+mysql> source C:/Users/Gabe/eclipse-workspace/POO_University-Library-Project/resources/uniLib.sql
+Query OK, 1 row affected (0.01 sec)
+
+Database changed
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> Show tables;
++--------------------------+
+| Tables_in_university_lib |
++--------------------------+
+| aluguel                  |
+| aluno                    |
+| exemplar                 |
+| livro                    |
+| revista                  |
++--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> DESCRIBE aluno;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| ra    | int          | NO   | PRI | NULL    |       |
+| nome  | varchar(200) | YES  |     | NULL    |       |
+| email | varchar(50)  | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Aluno;
++-----+---------+--------------------------+
+| ra  | nome    | email                    |
++-----+---------+--------------------------+
+| 101 | Gabriel | gabriel-santos@gmail.com |
++-----+---------+--------------------------+
+1 row in set (0.00 sec)
+
+mysql> describe Aluguel;
++-----------------+------+------+-----+---------+-------+
+| Field           | Type | Null | Key | Default | Extra |
++-----------------+------+------+-----+---------+-------+
+| exemplar_codigo | int  | NO   | PRI | NULL    |       |
+| aluno_ra        | int  | NO   | PRI | NULL    |       |
+| data_retirada   | date | NO   | PRI | NULL    |       |
+| data_devolucao  | date | YES  |     | NULL    |       |
++-----------------+------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT e.codigo, e.nome, e.qtd_paginas, l.isbn, l.edicao Exemplar e INNER JOIN Livro l ON e.codigo = l.exemplar_codigo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'e INNER JOIN Livro l ON e.codigo = l.exemplar_codigo' at line 1
+mysql> SELECT e.codigo, e.nome, e.qtd_paginas, l.isbn, l.edicao FROM Exemplar e INNER JOIN Livro l ON e.codigo = l.exemplar_codigo;
++--------+--------------+-------------+----------------+--------+
+| codigo | nome         | qtd_paginas | isbn           | edicao |
++--------+--------------+-------------+----------------+--------+
+|    101 | Harry Potter |         201 | "923-231-23-1" |      5 |
++--------+--------------+-------------+----------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT e.codigo, e.nome, e.qtd_paginas, r.issn FROM Exemplar e INNER JOIN Revista r ON e.codigo = r.exemplar_codigo;
++--------+-------------------+-------------+------------+
+| codigo | nome              | qtd_paginas | issn       |
++--------+-------------------+-------------+------------+
+|    201 | Veja - Tecnologia |          12 | 965-56-555 |
++--------+-------------------+-------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT e.codigo, e.nome, e.qtd_paginas, r.issn FROM Exemplar e INNER JOIN Revista r ON e.codigo = r.exemplar_codigo;
++--------+-------------------+-------------+------------+
+| codigo | nome              | qtd_paginas | issn       |
++--------+-------------------+-------------+------------+
+|    201 | Veja - Tecnologia |          12 | 965-56-555 |
++--------+-------------------+-------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT e.codigo, e.nome, e.qtd_paginas, l.isbn, l.edicao Exemplar e INNER JOIN Livro l ON e.codigo = l.exemplar_codigo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'e INNER JOIN Livro l ON e.codigo = l.exemplar_codigo' at line 1
+mysql> SELECT e.codigo, e.nome, e.qtd_paginas, l.isbn, l.edicao FROM Exemplar e INNER JOIN Livro l ON e.codigo = l.exemplar_codigo;
++--------+------------------------------------+-------------+----------------+--------+
+| codigo | nome                               | qtd_paginas | isbn           | edicao |
++--------+------------------------------------+-------------+----------------+--------+
+|    101 | Harry Potter                       |         201 | "923-231-23-1" |      5 |
+|    102 | Pr?ticas de Engenharia de Software |         657 | "225-932-64-2" |      8 |
++--------+------------------------------------+-------------+----------------+--------+
+2 rows in set (0.00 sec)
+
